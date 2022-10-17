@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function get_drinks(Request $request)
     {
-        $list = Food::where('type_id', 4)->take(10)->get();
+        $list = Food::where('type_id', 4)->take(10)->orderBy('created_at', 'DESC')->get();
 
         foreach ($list as $item) {
             $item['description'] = strip_tags($item['description']);
