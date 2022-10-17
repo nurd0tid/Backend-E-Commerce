@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,25 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Api\V1'], function () {
-    
-       Route::group(['prefix' => 'products'], function () {
+
+    Route::group(['prefix' => 'products'], function () {
         Route::get('popular', 'ProductController@get_popular_products');
-         Route::get('recommended', 'ProductController@get_recommended_products');
-          Route::get('test', 'ProductController@test_get_recommended_products');
-    }); 
-        Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
+        Route::get('recommended', 'ProductController@get_recommended_products');
+        Route::get('drinks', 'ProductController@get_drinks');
+    });
+    Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
         Route::post('register', 'CustomerAuthController@register');
         Route::post('login', 'CustomerAuthController@login');
-        });
-   
-        
-        Route::group(['prefix' => 'customer', 'middleware' => 'auth:api'], function () {
-            Route::get('notifications', 'NotificationController@get_notifications');
-            Route::get('info', 'CustomerController@info');
-            Route::post('update-profile', 'CustomerController@update_profile');
-            Route::post('update-interest', 'CustomerController@update_interest');
-            Route::put('cm-firebase-token', 'CustomerController@update_cm_firebase_token');
-            Route::get('suggested-foods', 'CustomerController@get_suggested_food');
+    });
+
+
+    Route::group(['prefix' => 'customer', 'middleware' => 'auth:api'], function () {
+        Route::get('notifications', 'NotificationController@get_notifications');
+        Route::get('info', 'CustomerController@info');
+        Route::post('update-profile', 'CustomerController@update_profile');
+        Route::post('update-interest', 'CustomerController@update_interest');
+        Route::put('cm-firebase-token', 'CustomerController@update_cm_firebase_token');
+        Route::get('suggested-foods', 'CustomerController@get_suggested_food');
 
         Route::group(['prefix' => 'address'], function () {
             Route::get('list', 'CustomerController@address_list');
@@ -40,7 +41,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
             Route::put('update/{id}', 'CustomerController@update_address');
             Route::delete('delete', 'CustomerController@delete_address');
         });
-                Route::group(['prefix' => 'order'], function () {
+        Route::group(['prefix' => 'order'], function () {
             Route::get('list', 'OrderController@get_order_list');
             Route::get('running-orders', 'OrderController@get_running_orders');
             Route::get('details', 'OrderController@get_order_details');
@@ -50,9 +51,9 @@ Route::group(['namespace' => 'Api\V1'], function () {
             Route::get('track', 'OrderController@track_order');
             Route::put('payment-method', 'OrderController@update_payment_method');
         });
-            });
-            
-        Route::group(['prefix' => 'config'], function () {
+    });
+
+    Route::group(['prefix' => 'config'], function () {
         Route::get('/', 'ConfigController@configuration');
         Route::get('/get-zone-id', 'ConfigController@get_zone');
         Route::get('place-api-autocomplete', 'ConfigController@place_api_autocomplete');
