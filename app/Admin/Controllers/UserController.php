@@ -29,8 +29,8 @@ class UserController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('f_name', __('Name'));
         $grid->column('email', __('Email'));
-        $grid->column('email_verified_at', __('Email verified at'));
-        $grid->email_verified_at()->display(function ($verified) {
+        // $grid->column('email_verified_at', __('Email verified at'));
+        $grid->email_verified_at("Verified")->display(function ($verified) {
             // Ternary Operator
             return $verified ? "Yes" : "No";
         });
