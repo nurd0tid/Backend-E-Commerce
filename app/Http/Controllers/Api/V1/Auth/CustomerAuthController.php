@@ -18,15 +18,15 @@ class CustomerAuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'phone' => 'required',
-            'password' => 'required|min:6'
+            'email' => 'required',
+            'password' => 'required|min:8'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
         }
         $data = [
-            'phone' => $request->phone,
+            'email' => $request->email,
             'password' => $request->password
         ];
 
